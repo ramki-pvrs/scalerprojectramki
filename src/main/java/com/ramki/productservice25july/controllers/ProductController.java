@@ -1,10 +1,12 @@
 package com.ramki.productservice25july.controllers;
 
 import com.ramki.productservice25july.dtos.CreateProductRequestDto;
+import com.ramki.productservice25july.dtos.CreateProductResponseDto;
 import com.ramki.productservice25july.services.ProductService;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+import com.ramki.productservice25july.models.Product;
 
 //url query params vs body params
 //to pass around data you need DTOs
@@ -45,13 +47,34 @@ public class ProductController {
     //Field Level injection is not good and not recommended due to complexties and maintenance of code
 
 
+    //to create a product
+    //controllers calls service to createProduct
+    //service creates the product and returns the Product model
+    //controller converts that into dto object and returns it //during this proc, it will take care of only required attributes of Product to be returned
+
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
     //@PostMapping("/products/")
     @PostMapping("/")
-    public String createProduct(@RequestBody CreateProductRequestDto createProductRequestDto) {
-        return "THe product price is " + createProductRequestDto.getPrice();
+    public CreateProductResponseDto createProduct(@RequestBody CreateProductRequestDto createProductRequestDto) {
+
+        //in Dto CreateProductRequestDto have a method which will return a product object
+        //that method will take all attributes from request and set the product attributes using setter and return
+        //product object
+        Product product = productService.createProduct(createProductRequestDto.toProduct());
+
+       // return "THe product price is " + createProductRequestDto.getPrice();
+        //return null; //you shd be returning createProductResponseDto object once implemented
+
+        //received product object from service is passed to response DTO to convert to appropriate response with only required product attributes
+        //in this case the attributes in response and model may be same but not always true; so surely you need response dto and not product obj to be directly returned
+        return CreateProductResponseDto.fromProduct(product);
+
+        //you might consider to return Product model, but not a good idea
+        //may be Product has lot of dB columns which are used only for app internal consumption
+        //and should not be exposed to clients or external world
+        //so you form a specific response object and send it out even if it has all attributes of Product currently
     }
 
     //@GetMapping("/products/")

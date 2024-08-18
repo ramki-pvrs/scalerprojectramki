@@ -1,5 +1,6 @@
 package com.ramki.productservice25july.services;
 
+import com.ramki.productservice25july.models.Product;
 import org.springframework.stereotype.Service;
 
 /*
@@ -28,9 +29,5 @@ DTOs are tied to a particular controller object means to a particular request
 public interface ProductService {
 
     //refer the comment above on why we shd not use dto
-    void createProduct(String title
-                        ,String description
-                        ,double price
-                         ,String category
-                         ,String imageUrl);
+    Product createProduct(Product product);
 }
