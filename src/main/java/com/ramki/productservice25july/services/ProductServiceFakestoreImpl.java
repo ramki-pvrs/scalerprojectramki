@@ -60,8 +60,8 @@ public class ProductServiceFakestoreImpl implements ProductService {
         //in theory REST API, you dont have method like create in the api call, POST req is meant for it
 
         FakeStoreCreateProductResponseDto response = restTemplate.postForObject("https://fakestoreapi.com/products"
-                                    ,request
-                                    , FakeStoreCreateProductResponseDto.class);
+                , request
+                , FakeStoreCreateProductResponseDto.class);
 
         Product product1 = new Product();
 
@@ -72,4 +72,5 @@ public class ProductServiceFakestoreImpl implements ProductService {
         product1.setImageUrl(response.getImage());
 
         return product1;
+    }
 }
