@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import com.ramki.productservice25july.models.Product;
 
+//Spring Container or Application Context for Beans
+
 //url query params vs body params
 //to pass around data you need DTOs
 //Data Transfer Object : receive information in client request;
@@ -50,7 +52,9 @@ public class ProductController {
     //to create a product
     //controllers calls service to createProduct
     //service creates the product and returns the Product model
-    //controller converts that into dto object and returns it //during this proc, it will take care of only required attributes of Product to be returned
+    //controller converts that into response dto object and returns it //during this proc, it will take care of only required attributes of Product to be returned
+
+    //dB will be called by service, nothing in controller about dB
 
     public ProductController(ProductService productService) {
         this.productService = productService;
