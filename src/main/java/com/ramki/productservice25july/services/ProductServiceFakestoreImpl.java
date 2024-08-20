@@ -48,10 +48,11 @@ public class ProductServiceFakestoreImpl implements ProductService {
         //being data mapping you will use a dto to achieve this
 
         FakeStoreCreateProductRequestDto request = new FakeStoreCreateProductRequestDto();
+
+        request.setTitle(product.getTitle());
         request.setDescription(product.getDescription());
         request.setPrice(product.getPrice());
         request.setImage(product.getImageUrl()); //different param names; mapped
-        request.setTitle(product.getTitle());
         request.setCategory(product.getCategoryName()); //different param names; mapped
 
         //postForObject takes 3 params; 3rdt party url; request body; response object type (to convert 3rd party params to your app params)
@@ -60,17 +61,19 @@ public class ProductServiceFakestoreImpl implements ProductService {
         //in theory REST API, you dont have method like create in the api call, POST req is meant for it
 
         FakeStoreCreateProductResponseDto response = restTemplate.postForObject("https://fakestoreapi.com/products"
-                , request
-                , FakeStoreCreateProductResponseDto.class);
+                ,request
+                ,FakeStoreCreateProductResponseDto.class);
 
         Product product1 = new Product();
 
         product1.setId(response.getId());
+        product1.setTitle(response.getTitle());
         product1.setDescription(response.getDescription());
         product1.setPrice(response.getPrice());
         product1.setCategoryName(response.getCategory());
-        product1.setTitle(response.getTitle());
         product1.setImageUrl(response.getImage());
+
+        //System.out.println("Product Id = " + product1.getId());
 
         return product1;
     }
