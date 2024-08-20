@@ -65,6 +65,7 @@ public class ProductServiceFakestoreImpl implements ProductService {
 
         Product product1 = new Product();
 
+        product1.setId(response.getId());
         product1.setDescription(response.getDescription());
         product1.setPrice(response.getPrice());
         product1.setCategoryName(response.getCategory());
