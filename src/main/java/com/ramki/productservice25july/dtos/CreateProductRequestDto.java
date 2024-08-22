@@ -1,6 +1,7 @@
 package com.ramki.productservice25july.dtos;
 
 
+import com.ramki.productservice25july.models.Category;
 import com.ramki.productservice25july.models.Product;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,7 +22,11 @@ public class CreateProductRequestDto {
         product.setDescription(description);
         product.setPrice(price);
         product.setImageUrl(imageUrl);
-        product.setCategoryName(categoryName);
+
+        Category category = new Category();
+        category.setName(categoryName);
+
+        product.setCategory(category);
 
         return product;
     }

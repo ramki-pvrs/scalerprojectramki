@@ -2,9 +2,9 @@ package com.ramki.productservice25july.services;
 
 import com.ramki.productservice25july.dtos.FakeStoreCreateProductRequestDto;
 import com.ramki.productservice25july.dtos.FakeStoreCreateProductResponseDto;
+import com.ramki.productservice25july.models.*;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
-import com.ramki.productservice25july.models.Product;
 import org.springframework.web.client.RestTemplate;
 
 //annotate to tell Spring to keep an object of ProductServiceFakestoreImpl in its container
@@ -53,7 +53,7 @@ public class ProductServiceFakestoreImpl implements ProductService {
         request.setDescription(product.getDescription());
         request.setPrice(product.getPrice());
         request.setImage(product.getImageUrl()); //different param names; mapped
-        request.setCategory(product.getCategoryName()); //different param names; mapped
+        request.setCategory(product.getCategory().getName()); //different param names; mapped
 
         //postForObject takes 3 params; 3rdt party url; request body; response object type (to convert 3rd party params to your app params)
         //this call is to create product in FakeStore app and get its response back
@@ -70,7 +70,13 @@ public class ProductServiceFakestoreImpl implements ProductService {
         product1.setTitle(response.getTitle());
         product1.setDescription(response.getDescription());
         product1.setPrice(response.getPrice());
-        product1.setCategoryName(response.getCategory());
+
+        Category category = new Category();
+        category.setName(response.getCategory());
+
+        product1.setCategory(category);
+
+
         product1.setImageUrl(response.getImage());
 
         //System.out.println("Product Id = " + product1.getId());

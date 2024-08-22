@@ -12,5 +12,10 @@ public class Product extends BaseModel {
     private String description;
     private double price;
     private String imageUrl;
-    private String categoryName;
+
+    //current class to other class
+    //1 product : 1 category
+    // M products        : 1 Category
+    @ManyToOne(cascade = {CascadeType.PERSIST})
+    private Category category;
 }

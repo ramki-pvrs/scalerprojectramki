@@ -8,6 +8,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import com.ramki.productservice25july.models.Product;
 
+//typically you create a product or get a product to send to someone who is asking for it
+//so you will not create one ProductDto and use it for both
+//it will be two types
+//DTO to hold params while creating a product (remember you may not pass all attributes of a product while creating, only mandatory; there may 100 other optional attributes for a single product)
+//DTO to hold params while using a product or getting a product
+
 //Spring Container or Application Context for Beans
 
 //url query params vs body params
