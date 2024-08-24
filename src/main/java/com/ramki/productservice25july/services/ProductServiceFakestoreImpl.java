@@ -25,7 +25,7 @@ import org.springframework.web.client.RestTemplate;
 
 
 @Service
-@Primary
+//@Primary
 public class ProductServiceFakestoreImpl implements ProductService {
 
     private RestTemplate restTemplate; //to create the product in 3rd party app
