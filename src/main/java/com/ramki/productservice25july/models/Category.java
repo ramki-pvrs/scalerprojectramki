@@ -17,4 +17,8 @@ public class Category extends BaseModel {
     @OneToMany(mappedBy = "category")
     private List<Product> featuredProducts;
 
+    private String specialCategory;
+
+    private int countOfProducts;
+
 }
